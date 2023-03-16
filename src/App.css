@@ -317,6 +317,76 @@ footer .input-group-text {
   border-radius: 10px;
   background-color: #fff;
 }
-
+.special-product-cart .badge {
+  background-color: #fc353c !important;
+}
 /* special product end */
+
+/* famous */
+
+.famous-card .famous-content {
+  top: 10%;
+  left: 5%;
+}
+.famous-content h5 {
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  color: white;
+  margin-bottom: 7px;
+  text-transform: uppercase;
+}
+.famous-content h6 {
+  font-size: 24px;
+  line-height: 38px;
+  font-weight: 500;
+  color: white;
+}
+.famous-content p {
+  font-size: 16;
+  line-height: 20px;
+  font-weight: 100;
+  color: white;
+}
+/* famous end */
 /* main content end */
+
+/* Our Store */
+
+.filter-card {
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 15px;
+}
+.filter-title {
+  font-size: 16px;
+  line-height: 20px;
+  font-weight: 600;
+  color: var(--color-lightgray3);
+  margin-bottom: 20px;
+}
+.filter-card ul,
+.filter-card .form-check-label {
+  list-style-type: none;
+  font-style: 13px;
+  line-height: 30px;
+  color: var(--color-lightgray2);
+  cursor: pointer;
+}
+.filter-card .form-check-input:focus {
+  box-shadow: none;
+  border-color: rgba(0, 0, 0, 0.25);
+}
+.filter-card .form-check-input:checked {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+}
+.sub-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-border);
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+/* Our Store end */
