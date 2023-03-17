@@ -144,56 +144,56 @@ const Home = () => {
                     <h6>Cameras</h6>
                     <p>10 items</p>
                   </div>
-                  <img src="images/camera.jpg" alt="camera" srcset="" />
+                  <img src="images/camera.jpg" alt="camera" />
                 </div>
                 <div className="d-flex gap align-items-center">
                   <div>
                     <h6>Samrt TV</h6>
                     <p>10 items</p>
                   </div>
-                  <img src="images/tv.jpg" alt="tv" srcset="" />
+                  <img src="images/tv.jpg" alt="tv" />
                 </div>
                 <div className="d-flex gap align-items-center">
                   <div>
                     <h6>Smart Watches</h6>
                     <p>10 items</p>
                   </div>
-                  <img src="images/headphone.jpg" alt="camera" srcset="" />
+                  <img src="images/headphone.jpg" alt="camera" />
                 </div>
                 <div className="d-flex gap align-items-center">
                   <div>
                     <h6>Cameras</h6>
                     <p>10 items</p>
                   </div>
-                  <img src="images/camera.jpg" alt="camera" srcset="" />
+                  <img src="images/camera.jpg" alt="camera" />
                 </div>
                 <div className="d-flex gap align-items-center">
                   <div>
                     <h6>Cameras</h6>
                     <p>10 items</p>
                   </div>
-                  <img src="images/camera.jpg" alt="camera" srcset="" />
+                  <img src="images/camera.jpg" alt="camera" />
                 </div>
                 <div className="d-flex gap align-items-center">
                   <div>
                     <h6>Samrt TV</h6>
                     <p>10 items</p>
                   </div>
-                  <img src="images/tv.jpg" alt="tv" srcset="" />
+                  <img src="images/tv.jpg" alt="tv" />
                 </div>
                 <div className="d-flex gap align-items-center">
                   <div>
                     <h6>Smart Watches</h6>
                     <p>10 items</p>
                   </div>
-                  <img src="images/headphone.jpg" alt="camera" srcset="" />
+                  <img src="images/headphone.jpg" alt="camera" />
                 </div>
                 <div className="d-flex gap align-items-center">
                   <div>
                     <h6>Cameras</h6>
                     <p>10 items</p>
                   </div>
-                  <img src="images/camera.jpg" alt="camera" srcset="" />
+                  <img src="images/camera.jpg" alt="camera" />
                 </div>
               </div>
             </div>
@@ -315,28 +315,28 @@ const Home = () => {
               <div className="marquee-inner-wrapper card-wrapper ">
                 <Marquee className="d-flex">
                   <div className="mx-4 w-25">
-                    <img src="images/brand-01.png" alt="brand" srcset="" />
+                    <img src="images/brand-01.png" alt="brand" />
                   </div>
                   <div className="mx-4 w-25">
-                    <img src="images/brand-02.png" alt="brand" srcset="" />
+                    <img src="images/brand-02.png" alt="brand" />
                   </div>
                   <div className="mx-4 w-25">
-                    <img src="images/brand-03.png" alt="brand" srcset="" />
+                    <img src="images/brand-03.png" alt="brand" />
                   </div>
                   <div className="mx-4 w-25">
-                    <img src="images/brand-04.png" alt="brand" srcset="" />
+                    <img src="images/brand-04.png" alt="brand" />
                   </div>
                   <div className="mx-4 w-25">
-                    <img src="images/brand-05.png" alt="brand" srcset="" />
+                    <img src="images/brand-05.png" alt="brand" />
                   </div>
                   <div className="mx-4 w-25">
-                    <img src="images/brand-06.png" alt="brand" srcset="" />
+                    <img src="images/brand-06.png" alt="brand" />
                   </div>
                   <div className="mx-4 w-25">
-                    <img src="images/brand-07.png" alt="brand" srcset="" />
+                    <img src="images/brand-07.png" alt="brand" />
                   </div>
                   <div className="mx-4 w-25">
-                    <img src="images/brand-08.png" alt="brand" srcset="" />
+                    <img src="images/brand-08.png" alt="brand" />
                   </div>
                 </Marquee>
               </div>
@@ -350,10 +350,20 @@ const Home = () => {
             <div className="col-12">
               <h3 className="section-heading">Our Latest Blogs</h3>
             </div>
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
-            <BlogCard />
+            <div className="row">
+              <div className="col-3">
+                <BlogCard />
+              </div>
+              <div className="col-3">
+                <BlogCard />
+              </div>
+              <div className="col-3">
+                <BlogCard />
+              </div>
+              <div className="col-3">
+                <BlogCard />
+              </div>
+            </div>
           </div>
         </div>
       </section>

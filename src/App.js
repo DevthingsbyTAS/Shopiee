@@ -4,9 +4,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Layout from "./components/layout";
 import About from "./pages/About";
+import Blog from "./pages/Blog";
+import CompareProduct from "./pages/CompareProduct";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import Store from "./pages/Store";
+import Wishlist from "./pages/Wishlist";
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
             <Route path="about" element={<About />} />
             <Route path="store" element={<Store />} />
             <Route path="contact" element={<Contact />} />
+            <Route path="blogs" element={<Blog />} />
+            <Route path="compare-product" element={<CompareProduct />} />
+            <Route path="wishlist" element={<Wishlist />} />
           </Route>
         </Routes>
       </BrowserRouter>
