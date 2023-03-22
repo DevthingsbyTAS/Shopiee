@@ -18,7 +18,14 @@ const ProductCard = (props) => {
         </div>
         <div className="product-image">
           <img className="img-fluid" src="images/watch.jpg" alt="prod img 1" />
-          <img className="img-fluid" src="images/laptop.jpg" alt="laptop 2" />
+          <img
+            style={{
+              height: "270px",
+            }}
+            className="img-fluid"
+            src="images/laptop.jpg"
+            alt="laptop 2"
+          />
         </div>
         <div className="product-details">
           <h6 className="brand">Havels</h6>
