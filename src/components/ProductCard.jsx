@@ -1,7 +1,12 @@
 import React from "react";
 import ReactStars from "react-rating-stars-component";
 import { Link, useLocation } from "react-router-dom";
-
+import wish from "../images/wish.svg";
+import watch from "../images/watch.jpg";
+import laptop from "../images/laptop.jpg";
+import prodcomp from "../images/prodcompare.svg";
+import view from "../images/view.svg";
+import cross from "../images/cross.svg";
 const ProductCard = (props) => {
   const { grid } = props;
   let location = useLocation();
@@ -13,17 +18,17 @@ const ProductCard = (props) => {
       <Link to="1" className="product-card position-relative w-100">
         <div className="wishlist-icon position-absolute">
           <Link>
-            <img src="images/wish.svg" alt="wish" />
+            <img src={wish} alt="wish" />
           </Link>
         </div>
         <div className="product-image">
-          <img className="img-fluid" src="images/watch.jpg" alt="prod img 1" />
+          <img className="img-fluid" src={watch} alt="prod img 1" />
           <img
             style={{
               height: "270px",
             }}
             className="img-fluid"
-            src="images/laptop.jpg"
+            src={laptop}
             alt="laptop 2"
           />
         </div>
@@ -48,13 +53,13 @@ const ProductCard = (props) => {
         <div className="action-bar position-absolute">
           <div className="d-flex flex-column">
             <Link>
-              <img src="images/prodcompare.svg" alt="prodcompare" />
+              <img src={prodcomp} alt="prodcompare" />
             </Link>
             <Link>
-              <img src="images/view.svg" alt="view" />
+              <img src={view} alt="view" />
             </Link>
             <Link>
-              <img src="images/cross.svg" alt="cart" />
+              <img src={cross} alt="cart" />
             </Link>
           </div>
         </div>

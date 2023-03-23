@@ -5,16 +5,28 @@ import Meta from "../components/Meta";
 import ProductCard from "../components/ProductCard";
 import ReactImageZoom from "react-image-zoom";
 // import watch from "../../public/images/watch.jpg";
-
+import Color from "../components/Color";
+import { TbGitCompare } from "react-icons/tb";
+import { AiOutlineHeart } from "react-icons/ai";
+import { Link } from "react-router-dom";
 const Singleproduct = () => {
   const props = {
     width: 400,
-    height: 250,
+    height: 600,
     zoomWidth: 500,
     img: "https://content.rolex.com/dam/2022-11/upright-bba-with-shadow/m126283rbr-0031.png?impolicy=v6-upright&imwidth=270",
   };
 
   const [orderedProduct, setOrderedProduct] = React.useState(true);
+  const copyToClipboard = (text) => {
+    console.log("text", text);
+    var textField = document.createElement("textarea");
+    textField.innerText = text;
+    document.body.appendChild(textField);
+    textField.select();
+    document.execCommand("copy");
+    textField.remove();
+  };
   return (
     <>
       <Meta title="Single Product Name" />
@@ -74,17 +86,108 @@ const Singleproduct = () => {
                       edit={false}
                       activeColor="#ffd700"
                     />
-                    <p className="mb-0">(2 Reviews)</p>
+                    <p className="mb-0 t-review">(2 Reviews)</p>
                   </div>
-                  <a
-                    href="#review"
-                    className="text-dark text-decoration-underline"
-                  >
+                  <a href="#review" className="review-btn">
                     Write a review
                   </a>
                 </div>
-                <div className="border-bottom">
-                  
+                <div className="border-bottom py-3">
+                  <div className="d-flex gap-10 align-items-center my-2">
+                    <h3 className="product-heading">Type : </h3>
+                    <p className="product-data">Watch</p>
+                  </div>
+                  <div className="d-flex gap-10 align-items-center my-2">
+                    <h3 className="product-heading">Brand : </h3>
+                    <p className="product-data">Havells</p>
+                  </div>
+                  <div className="d-flex gap-10 align-items-center my-2">
+                    <h3 className="product-heading">Category : </h3>
+                    <p className="product-data">Watch</p>
+                  </div>
+                  <div className="d-flex gap-10 align-items-center my-2">
+                    <h3 className="product-heading">Tags : </h3>
+                    <p className="product-data">Watch</p>
+                  </div>
+                  <div className="d-flex gap-10 align-items-center my-2">
+                    <h3 className="product-heading">Availability : </h3>
+                    <p className="product-data">In Stock</p>
+                  </div>
+                  <div className="d-flex gap-10 align-items-center mt-2 mb-3">
+                    <h3 className="product-heading">Size : </h3>
+                    <div className="d-flex flex-wrap gap-15">
+                      <span className="badge border border-1 bg-white text-dark border-secondary ">
+                        S
+                      </span>
+                      <span className="badge border border-1 bg-white text-dark border-secondary ">
+                        M
+                      </span>
+                      <span className="badge border border-1 bg-white text-dark border-secondary ">
+                        XL
+                      </span>
+                      <span className="badge border border-1 bg-white text-dark border-secondary ">
+                        XXL
+                      </span>
+                    </div>
+                  </div>
+                  <div className="d-flex gap-10 align-items-center mt-2 mb-3">
+                    <h3 className="product-heading">Color : </h3>
+                    <Color />
+                  </div>
+                  <div className="d-flex gap-15 flex-row align-items-center mt-2 mb-3">
+                    <h3 className="product-heading">Quantity : </h3>
+                    <div className="">
+                      <input
+                        min={1}
+                        max={10}
+                        id="quantity"
+                        type="number"
+                        name="quantity"
+                        className=" form-control"
+                        style={{ width: "50px" }}
+                      />
+                    </div>
+                    <div className="d-flex gap-30 align-items-center ms-5">
+                      <button className="button">Add to cart</button>
+                      <button to="/signup" className="button signup">
+                        Buy Now
+                      </button>
+                    </div>
+                  </div>
+                  <div className="d-flex align-items-center gap-15">
+                    <div className="">
+                      <a href="">
+                        <TbGitCompare className="fs-5 me-2" />
+                        Add to Compare
+                      </a>
+                    </div>
+                    <div className="">
+                      <AiOutlineHeart className="fs-5 me-2" />
+                      <a href="">Add to Wishlist</a>
+                    </div>
+                  </div>
+                  <div className="d-flex flex-column gap-10  my-3">
+                    <h3 className="product-heading">Shipping & Returns : </h3>
+                    <p className="product-data">
+                      Free shipping to order over $100 all US doesmetic
+                      <b>5-10 business days</b>
+                    </p>
+                  </div>
+                  <div className="d-flex gap-10 align-items-center my-3">
+                    <h3 className="product-heading">Product link : </h3>
+                    <p className="product-data">
+                      <a
+                        href="javascript:void(0);"
+                        onClick={() =>
+                          copyToClipboard(
+                            "https://content.rolex.com/dam/2022-11/upright-bba-with-shadow/m126283rbr-0031.png?impolicy=v6-upright&imwidth=270"
+                          )
+                        }
+                      >
+                        Copy Product Link
+                      </a>
+                    </p>
+                  </div>
                 </div>
               </div>
             </div>

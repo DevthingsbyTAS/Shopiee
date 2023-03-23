@@ -5,6 +5,8 @@ import "./App.css";
 import Layout from "./components/layout";
 import About from "./pages/About";
 import Blog from "./pages/Blog";
+import Cart from "./pages/Cart";
+import Checkout from "./pages/Checkout";
 import CompareProduct from "./pages/CompareProduct";
 import Contact from "./pages/Contact";
 import Forgotpassword from "./pages/Forgotpassword";
@@ -34,6 +36,8 @@ function App() {
             <Route path="blogs" element={<Blog />} />
             <Route path="compare-product" element={<CompareProduct />} />
             <Route path="wishlist" element={<Wishlist />} />
+            <Route path="cart" element={<Cart />} />
+            <Route path="checkout" element={<Checkout />} />
             <Route path="login" element={<Login />} />
             <Route path="signUp" element={<SignUp />} />
             <Route path="forgotpassword" element={<Forgotpassword />} />
