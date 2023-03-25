@@ -11,10 +11,11 @@ import { AiOutlineHeart } from "react-icons/ai";
 import Container from "../components/Container";
 const Singleproduct = () => {
   const props = {
-    width: 400,
+    width: 594,
     height: 600,
-    zoomWidth: 500,
-    img: "https://content.rolex.com/dam/2022-11/upright-bba-with-shadow/m126283rbr-0031.png?impolicy=v6-upright&imwidth=270",
+    zoomWidth: 600,
+
+    img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg",
   };
 
   const [orderedProduct, setOrderedProduct] = React.useState(true);
@@ -36,7 +37,12 @@ const Singleproduct = () => {
           <div className="col-6">
             <div className="main-product-image ">
               <div>
-                <ReactImageZoom {...props} />
+                <img
+                  src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
+                  className="img-fluid"
+                  alt="1"
+                />
+                {/* <ReactImageZoom {...props} /> */}
               </div>
             </div>
             <div className="other-product-images d-flex flex-wrap gap-10">
@@ -44,28 +50,28 @@ const Singleproduct = () => {
                 <img
                   src="https://content.rolex.com/dam/2022-11/upright-bba-with-shadow/m126283rbr-0031.png?impolicy=v6-upright&imwidth=270"
                   className="img-fluid"
-                  alt=""
+                  alt="1"
                 />
               </div>
               <div>
                 <img
                   src="https://content.rolex.com/dam/2022-11/upright-bba-with-shadow/m126283rbr-0031.png?impolicy=v6-upright&imwidth=270"
                   className="img-fluid"
-                  alt=""
+                  alt="2"
                 />
               </div>
               <div>
                 <img
                   src="https://content.rolex.com/dam/2022-11/upright-bba-with-shadow/m126283rbr-0031.png?impolicy=v6-upright&imwidth=270"
                   className="img-fluid"
-                  alt=""
+                  alt="3"
                 />
               </div>
               <div>
                 <img
                   src="https://content.rolex.com/dam/2022-11/upright-bba-with-shadow/m126283rbr-0031.png?impolicy=v6-upright&imwidth=270"
                   className="img-fluid"
-                  alt=""
+                  alt="4"
                 />
               </div>
             </div>
