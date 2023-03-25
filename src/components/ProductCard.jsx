@@ -17,9 +17,9 @@ const ProductCard = (props) => {
     >
       <Link to="1" className="product-card position-relative w-100">
         <div className="wishlist-icon position-absolute">
-          <Link>
+          <button className="border-0 bg-transparent">
             <img src={wish} alt="wish" />
-          </Link>
+          </button>
         </div>
         <div className="product-image">
           <img className="img-fluid" src={watch} alt="prod img 1" />
@@ -52,15 +52,15 @@ const ProductCard = (props) => {
         </div>
         <div className="action-bar position-absolute">
           <div className="d-flex flex-column">
-            <Link>
+            <button className="border-0 bg-transparent">
               <img src={prodcomp} alt="prodcompare" />
-            </Link>
-            <Link>
+            </button>
+            <button className="border-0 bg-transparent">
               <img src={view} alt="view" />
-            </Link>
-            <Link>
+            </button>
+            <button className="border-0 bg-transparent">
               <img src={cross} alt="cart" />
-            </Link>
+            </button>
           </div>
         </div>
       </Link>
