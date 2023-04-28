@@ -6,14 +6,15 @@ import CustomInput from "../components/CustomInput";
 import Meta from "../components/Meta";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../features/user/userSLice";
 
 const Signup = () => {
-  let userSchema = Yup.object({
+  const { isLoading } = useSelector((state) => state.auth);
+  let registerSchema = Yup.object({
     firstName: Yup.string().required(),
     lastName: Yup.string().required(),
-    email: Yup.string().nullable().required("required"),
+    email: Yup.string().email().required("required"),
     mobile: Yup.string().required("required"),
     password: Yup.string().required("required"),
   });
@@ -26,12 +27,13 @@ const Signup = () => {
       mobile: "",
       password: "",
     },
-    validationSchema: userSchema,
+    validationSchema: registerSchema,
     onSubmit: (values) => {
       dispatch(registerUser(values));
       // console.log("vlaeus", values);
     },
   });
+  // console.log("isLoading", isLoading);
 
   return (
     <>
@@ -113,7 +115,11 @@ const Signup = () => {
                 </div>
                 <div>
                   <div className="d-flex mt-3 justify-content-center gap-15 align-items-center">
-                    <button className="button border-0" type="submit">
+                    <button
+                      className="button border-0"
+                      type="submit"
+                      disabled={isLoading}
+                    >
                       Sign up
                     </button>
                   </div>
