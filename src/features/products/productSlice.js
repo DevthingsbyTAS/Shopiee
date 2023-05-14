@@ -1,87 +1,83 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { authService } from "./userService";
 import { toast } from "react-toastify";
-
-const getCustomerfromLocalStorage = localStorage.getItem("customer")
-  ? JSON.parse(localStorage.getItem("customer"))
-  : null;
-
+import { productService } from "./productService";
 const InitialState = {
-  user: getCustomerfromLocalStorage,
+  products: null,
   isError: false,
   isSuccess: false,
   isLoading: false,
   message: "",
 };
-export const registerUser = createAsyncThunk(
-  "auth/register",
+
+export const getProducts = createAsyncThunk(
+  "getProducts",
   async (data, thunkApi) => {
     try {
-      return authService.register(data);
+      return productService.getProducts();
     } catch (err) {
       return thunkApi.rejectWithValue(err);
     }
   }
 );
-export const loginUser = createAsyncThunk(
-  "auth/login",
+export const AddtoWishList = createAsyncThunk(
+  "AddtoWishList",
   async (data, thunkApi) => {
     try {
-      return authService.login(data);
+      return productService.addToWishlist(data);
     } catch (err) {
       return thunkApi.rejectWithValue(err);
     }
   }
 );
-export const authSlice = createSlice({
-  name: "auth",
+
+export const productSlice = createSlice({
+  name: "productSlice",
   initialState: InitialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(registerUser.pending, (state) => {
+      .addCase(getProducts.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(registerUser.fulfilled, (state, action) => {
+      .addCase(getProducts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.products = action.payload;
         if (state.isSuccess) {
-          toast.info("user created!");
+          toast.info("Products Fetched!");
         }
       })
-      .addCase(registerUser.rejected, (state, action) => {
+      .addCase(getProducts.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
         if (state.isError) {
-          toast.error("couldn't create at the moment!");
+          toast.error("cant fetch product due to:" + action.error);
         }
       })
-      .addCase(loginUser.pending, (state) => {
+      .addCase(AddtoWishList.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(loginUser.fulfilled, (state, action) => {
+      .addCase(AddtoWishList.fulfilled, (state, action) => {
         state.isLoading = false;
         state.isError = false;
         state.isSuccess = true;
-        state.user = action.payload;
+        state.AddtoWishList = action.payload;
         if (state.isSuccess) {
-          localStorage.setItem("token", action?.payload?.token);
-          toast.info("user logged in!");
+          toast.info("Added to wishlist!");
         }
       })
-      .addCase(loginUser.rejected, (state, action) => {
+      .addCase(AddtoWishList.rejected, (state, action) => {
         state.isLoading = false;
         state.isError = true;
         state.isSuccess = false;
         state.message = action.error;
         if (state.isError) {
-          toast.error("couldn't login at the moment!");
+          toast.error("cant add to:" + action.error);
         }
       });
   },
 });
-export default authSlice.reducer;
+export default productSlice.reducer;

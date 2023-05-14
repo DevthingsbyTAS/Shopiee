@@ -12,8 +12,8 @@ import { registerUser } from "../features/user/userSLice";
 const Signup = () => {
   const { isLoading } = useSelector((state) => state.auth);
   let registerSchema = Yup.object({
-    firstName: Yup.string().required(),
-    lastName: Yup.string().required(),
+    firstname: Yup.string().required(),
+    lastname: Yup.string().required(),
     email: Yup.string().email().required("required"),
     mobile: Yup.string().required("required"),
     password: Yup.string().required("required"),
@@ -21,8 +21,8 @@ const Signup = () => {
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
+      firstname: "",
+      lastname: "",
       email: "",
       mobile: "",
       password: "",
@@ -54,24 +54,24 @@ const Signup = () => {
               >
                 <div>
                   <CustomInput
-                    onChange={formik.handleChange("firstName")}
-                    onBlur={formik.handleBlur("firstName")}
+                    onChange={formik.handleChange("firstname")}
+                    onBlur={formik.handleBlur("firstname")}
                     name="text"
-                    error={formik.touched["firstName"]}
-                    errorMessage={formik.errors["firstName"]}
-                    value={formik.values.firstName}
+                    error={formik.touched["firstname"]}
+                    errorMessage={formik.errors["firstname"]}
+                    value={formik.values.firstname}
                     placeholder="First Name"
                     type="name"
                   />
                 </div>
                 <div>
                   <CustomInput
-                    onChange={formik.handleChange("lastName")}
-                    onBlur={formik.handleBlur("lastName")}
+                    onChange={formik.handleChange("lastname")}
+                    onBlur={formik.handleBlur("lastname")}
                     name="text"
-                    error={formik.touched["lastName"]}
-                    errorMessage={formik.errors["lastName"]}
-                    value={formik.values.lastName}
+                    error={formik.touched["lastname"]}
+                    errorMessage={formik.errors["lastname"]}
+                    value={formik.values.lastname}
                     placeholder="Last Name"
                     type="name"
                   />

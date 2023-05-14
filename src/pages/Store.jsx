@@ -5,10 +5,20 @@ import Color from "../components/Color";
 import Container from "../components/Container";
 import Meta from "../components/Meta";
 import ProductCard from "../components/ProductCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getProducts } from "../features/products/productSlice";
 
 const Store = () => {
   const [grid, setGrid] = React.useState(4);
-
+  const dispatch = useDispatch();
+  const { products } = useSelector((state) => state.product);
+  const GetAllProducts = () => {
+    dispatch(getProducts());
+  };
+  React.useEffect(() => {
+    GetAllProducts();
+  }, []);
+  // console.log("products", products);
   return (
     <>
       <Meta title="Our Store" />
@@ -242,9 +252,7 @@ const Store = () => {
             </div>
             <div className="products-list pb-5">
               <div className="d-flex gap-10 flex-wrap">
-                <ProductCard grid={grid} gridBool={true} />
-                <ProductCard grid={grid} gridBool={true} />
-                <ProductCard grid={grid} gridBool={true} />
+                <ProductCard grid={grid} gridBool={true} data={products} />
               </div>
             </div>
           </div>
