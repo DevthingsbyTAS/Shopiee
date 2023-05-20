@@ -33,6 +33,16 @@ export const loginUser = createAsyncThunk(
     }
   }
 );
+export const getUseProductrWishlist = createAsyncThunk(
+  "user/getUserWishlist",
+  async (data, thunkApi) => {
+    try {
+      return authService.getUserWishlist();
+    } catch (err) {
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
 export const authSlice = createSlice({
   name: "auth",
   initialState: InitialState,
@@ -80,6 +90,27 @@ export const authSlice = createSlice({
         state.message = action.error;
         if (state.isError) {
           toast.error("couldn't login at the moment!");
+        }
+      })
+      .addCase(getUseProductrWishlist.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getUseProductrWishlist.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.wishlist = action.payload;
+        if (state.isSuccess) {
+          toast.info("Prdouct wishlisted fetched!");
+        }
+      })
+      .addCase(getUseProductrWishlist.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        if (state.isError) {
+          toast.error("couldn't fetch at the moment!");
         }
       });
   },

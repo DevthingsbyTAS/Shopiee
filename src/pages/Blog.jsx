@@ -3,8 +3,26 @@ import BlogCard from "../components/BlogCard";
 import BreadCrumb from "../components/BreadCrumb";
 import Container from "../components/Container";
 import Meta from "../components/Meta";
+import { useDispatch, useSelector } from "react-redux";
+import { getblogs } from "../features/blog/blogSlice";
+import moment from "moment/moment";
 
 const Blog = () => {
+  const disptach = useDispatch();
+  const { blogs } = useSelector((state) => state.blog);
+  React.useEffect(() => {
+    getWishlistFromDB();
+  }, []);
+
+  const getWishlistFromDB = () => {
+    disptach(getblogs());
+  };
+  const removeWishlistFromDB = (item) => {
+    // disptach(AddtoWishList(item?._id));
+    setTimeout(() => {
+      getWishlistFromDB();
+    }, 800);
+  };
   return (
     <>
       <Meta title="Blogs" />
@@ -26,18 +44,17 @@ const Blog = () => {
           </div>
           <div className="col-9">
             <div className="row">
-              <div className="col-6">
-                <BlogCard />
-              </div>
-              <div className="col-6">
-                <BlogCard />
-              </div>
-              <div className="col-6">
-                <BlogCard />
-              </div>
-              <div className="col-6">
-                <BlogCard />
-              </div>
+              {blogs?.map((item, index) => (
+                <div className="col-6">
+                  <BlogCard
+                    id={item?._id}
+                    title={item?.title}
+                    description={item?.description}
+                    image={item?.images?.[0]?.url}
+                    date={moment(item?.createdAt)?.format("LLLL")}
+                  />
+                </div>
+              ))}
             </div>
           </div>
         </div>

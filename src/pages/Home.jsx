@@ -7,7 +7,25 @@ import SpecialProduct from "../components/SpecialProduct";
 import PopularProducts from "../components/PopularProducts";
 import Container from "../components/Container";
 import { services } from "../utils/data";
+import { useDispatch, useSelector } from "react-redux";
+import { getblogs } from "../features/blog/blogSlice";
+import moment from "moment";
 const Home = () => {
+  const disptach = useDispatch();
+  const { blogs } = useSelector((state) => state.blog);
+  React.useEffect(() => {
+    getWishlistFromDB();
+  }, []);
+
+  const getWishlistFromDB = () => {
+    disptach(getblogs());
+  };
+  const removeWishlistFromDB = (item) => {
+    // disptach(AddtoWishList(item?._id));
+    setTimeout(() => {
+      getWishlistFromDB();
+    }, 800);
+  };
   return (
     <>
       <Container class1={"home-wrapper-1 py-5"}>
@@ -310,18 +328,21 @@ const Home = () => {
             <h3 className="section-heading">Our Latest Blogs</h3>
           </div>
           <div className="row">
-            <div className="col-3">
-              <BlogCard />
-            </div>
-            <div className="col-3">
-              <BlogCard />
-            </div>
-            <div className="col-3">
-              <BlogCard />
-            </div>
-            <div className="col-3">
-              <BlogCard />
-            </div>
+            {blogs?.map((item, index) => {
+              if (index < 3) {
+                return (
+                  <div className="col-3">
+                    <BlogCard
+                      id={item?._id}
+                      title={item?.title}
+                      description={item?.description}
+                      image={item?.images?.[0]?.url}
+                      date={moment(item?.createdAt)?.format("LLLL")}
+                    />
+                  </div>
+                );
+              }
+            })}
           </div>
         </div>
       </Container>
