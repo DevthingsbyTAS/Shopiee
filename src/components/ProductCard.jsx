@@ -10,7 +10,8 @@ import cross from "../images/cross.svg";
 import { useDispatch } from "react-redux";
 import { AddtoWishList } from "../features/products/productSlice";
 const ProductCard = (props) => {
-  const { grid, data } = props;
+  const { grid, data, key, title, brand, price, totalrating, sold, quantity } =
+    props;
   let location = useLocation();
   const dispatch = useDispatch();
 
@@ -25,9 +26,16 @@ const ProductCard = (props) => {
           key={index}
           className={`${
             location.pathname.includes("product") ? `gr-${grid}` : "col-3"
-          }`}
+          } mb-2`}
         >
-          <div className="product-card position-relative w-100">
+          <Link
+            to={
+              location.pathname == "/"
+                ? "/product/" + item?._id
+                : "/product/" + item?._id
+            }
+            className="product-card position-relative w-100"
+          >
             <div className="wishlist-icon position-absolute">
               <button
                 className="border-0 bg-transparent"
@@ -91,7 +99,7 @@ const ProductCard = (props) => {
                 </button>
               </div>
             </div>
-          </div>
+          </Link>
         </div>
       ))}
     </>

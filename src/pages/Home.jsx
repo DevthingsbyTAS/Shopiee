@@ -10,20 +10,26 @@ import { services } from "../utils/data";
 import { useDispatch, useSelector } from "react-redux";
 import { getblogs } from "../features/blog/blogSlice";
 import moment from "moment";
+import { getProducts } from "../features/products/productSlice";
 const Home = () => {
   const disptach = useDispatch();
   const { blogs } = useSelector((state) => state.blog);
+  const { products } = useSelector((state) => state.product);
   React.useEffect(() => {
-    getWishlistFromDB();
+    getBlogsFromDB();
+    getProductsFromDB();
   }, []);
 
-  const getWishlistFromDB = () => {
+  const getBlogsFromDB = () => {
     disptach(getblogs());
+  };
+  const getProductsFromDB = () => {
+    disptach(getProducts());
   };
   const removeWishlistFromDB = (item) => {
     // disptach(AddtoWishList(item?._id));
     setTimeout(() => {
-      getWishlistFromDB();
+      getBlogsFromDB();
     }, 800);
   };
   return (
@@ -193,10 +199,17 @@ const Home = () => {
           <div className="col-12">
             <h3 className="section-heading">Featured Products</h3>
           </div>
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {products?.map((item, index) => {
+            if (item?.tags == "featured") {
+              return (
+                <ProductCard
+                  key={index}
+                  data={products?.filter((item) => item?.tags == "featured")}
+                  grid={3}
+                />
+              );
+            }
+          })}
         </div>
       </Container>
       <Container class1={"famous-wrapper py-5 home-wrapper-2"}>
@@ -268,13 +281,25 @@ const Home = () => {
       <Container class1={"special-wrapper py-5 home-wrapper-2"}>
         <div className="row">
           <div className="col-12">
-            <h3 className="section-heading">Featured Products</h3>
+            <h3 className="section-heading">Special Products</h3>
           </div>
         </div>
         <div className="row">
-          <SpecialProduct />
-          <SpecialProduct />
-          <SpecialProduct />
+          {products?.map((item, index) => {
+            if (item?.tags == "special") {
+              return (
+                <SpecialProduct
+                  key={index}
+                  title={item?.title}
+                  brand={item?.brand}
+                  price={item?.price}
+                  totalrating={item?.totalrating?.toString()}
+                  sold={item?.sold}
+                  quantity={item?.quantity}
+                />
+              );
+            }
+          })}
         </div>
       </Container>
       <Container class1={"popular-wrapper py-5 home-wrapper-2"}>
@@ -282,10 +307,17 @@ const Home = () => {
           <div className="col-12">
             <h3 className="section-heading">Our Popular Products</h3>
           </div>
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          {products?.map((item, index) => {
+            if (item?.tags == "popular") {
+              return (
+                <ProductCard
+                  key={index}
+                  data={products?.filter((item) => item?.tags == "popular")}
+                  grid={3}
+                />
+              );
+            }
+          })}
         </div>
       </Container>
       <Container class1={"marquee-wrapper py-2"}>
