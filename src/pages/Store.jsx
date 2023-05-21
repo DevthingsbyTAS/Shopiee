@@ -7,11 +7,13 @@ import Meta from "../components/Meta";
 import ProductCard from "../components/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../features/products/productSlice";
+import { useNavigate } from "react-router-dom";
 
 const Store = () => {
   const [grid, setGrid] = React.useState(4);
   const dispatch = useDispatch();
   const { products } = useSelector((state) => state.product);
+  const navigate = useNavigate();
   const GetAllProducts = () => {
     dispatch(getProducts());
   };
@@ -252,7 +254,12 @@ const Store = () => {
             </div>
             <div className="products-list pb-5">
               <div className="d-flex gap-10 flex-wrap">
-                <ProductCard grid={grid} gridBool={true} data={products} />
+                <ProductCard
+                  grid={grid}
+                  gridBool={true}
+                  data={products}
+                  navigate={navigate}
+                />
               </div>
             </div>
           </div>

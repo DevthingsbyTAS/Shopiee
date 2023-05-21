@@ -10,8 +10,18 @@ import cross from "../images/cross.svg";
 import { useDispatch } from "react-redux";
 import { AddtoWishList } from "../features/products/productSlice";
 const ProductCard = (props) => {
-  const { grid, data, key, title, brand, price, totalrating, sold, quantity } =
-    props;
+  const {
+    grid,
+    data,
+    key,
+    title,
+    brand,
+    price,
+    navigate,
+    totalrating,
+    sold,
+    quantity,
+  } = props;
   let location = useLocation();
   const dispatch = useDispatch();
 
@@ -28,12 +38,12 @@ const ProductCard = (props) => {
             location.pathname.includes("product") ? `gr-${grid}` : "col-3"
           } mb-2`}
         >
-          <Link
-            to={
-              location.pathname == "/"
-                ? "/product/" + item?._id
-                : "/product/" + item?._id
-            }
+          <div
+            // to={
+            //   location.pathname == "/"
+            //     ? "/product/" + item?._id
+            //     : "/product/" + item?._id
+            // }
             className="product-card position-relative w-100"
           >
             <div className="wishlist-icon position-absolute">
@@ -92,14 +102,24 @@ const ProductCard = (props) => {
                   <img src={prodcomp} alt="prodcompare" />
                 </button>
                 <button className="border-0 bg-transparent">
-                  <img src={view} alt="view" />
+                  <img
+                    src={view}
+                    alt="view"
+                    onClick={() => {
+                      navigate(
+                        location.pathname == "/"
+                          ? "/product/" + item?._id
+                          : "/product/" + item?._id
+                      );
+                    }}
+                  />
                 </button>
                 <button className="border-0 bg-transparent">
                   <img src={cross} alt="cart" />
                 </button>
               </div>
             </div>
-          </Link>
+          </div>
         </div>
       ))}
     </>

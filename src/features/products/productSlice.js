@@ -19,6 +19,16 @@ export const getProducts = createAsyncThunk(
     }
   }
 );
+export const getSingleProduct = createAsyncThunk(
+  "getSingleProduct",
+  async (data, thunkApi) => {
+    try {
+      return productService.getSingleProduct(data);
+    } catch (err) {
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
 export const AddtoWishList = createAsyncThunk(
   "AddtoWishList",
   async (data, thunkApi) => {
@@ -76,6 +86,27 @@ export const productSlice = createSlice({
         state.message = action.error;
         if (state.isError) {
           toast.error("cant add to:" + action.error);
+        }
+      })
+      .addCase(getSingleProduct.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getSingleProduct.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.getSingleProductData = action.payload;
+        if (state.isSuccess) {
+          toast.info("Product details fetched!");
+        }
+      })
+      .addCase(getSingleProduct.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        if (state.isError) {
+          toast.error("cant fetch due to:" + action.error);
         }
       });
   },

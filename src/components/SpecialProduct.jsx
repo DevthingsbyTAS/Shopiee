@@ -3,7 +3,17 @@ import ReactStars from "react-rating-stars-component";
 import { Link } from "react-router-dom";
 
 const SpecialProduct = (props) => {
-  const { key, title, brand, price, totalrating, sold, quantity } = props;
+  const {
+    id,
+    navigate,
+    key,
+    title,
+    brand,
+    price,
+    totalrating,
+    sold,
+    quantity,
+  } = props;
   return (
     <div className="col-6 mb-3" key={key}>
       <div className="special-product-cart">
@@ -43,13 +53,16 @@ const SpecialProduct = (props) => {
                 <div
                   className="progress-bar"
                   role="progressbar"
-                  style={{ width: quantity / quantity + sold * 100+"%" }}
+                  style={{ width: quantity / quantity + sold * 100 + "%" }}
                   aria-valuenow={quantity / quantity + sold * 100}
                   aria-valuemin={quantity}
                   aria-valuemax={sold + quantity}
                 ></div>
               </div>
             </div>
+            <Link className="button mx-1" to={"/product/" + id}>
+              View
+            </Link>
             <Link className="button">Add to cart</Link>
           </div>
         </div>

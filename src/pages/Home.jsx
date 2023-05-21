@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import BlogCard from "../components/BlogCard";
 import ProductCard from "../components/ProductCard";
@@ -15,6 +15,8 @@ const Home = () => {
   const disptach = useDispatch();
   const { blogs } = useSelector((state) => state.blog);
   const { products } = useSelector((state) => state.product);
+  const navigate = useNavigate();
+
   React.useEffect(() => {
     getBlogsFromDB();
     getProductsFromDB();
@@ -206,6 +208,7 @@ const Home = () => {
                   key={index}
                   data={products?.filter((item) => item?.tags == "featured")}
                   grid={3}
+                  navigate={navigate}
                 />
               );
             }
@@ -291,9 +294,11 @@ const Home = () => {
                 <SpecialProduct
                   key={index}
                   title={item?.title}
+                  id={item?._id}
                   brand={item?.brand}
                   price={item?.price}
                   totalrating={item?.totalrating?.toString()}
+                  navigate={navigate}
                   sold={item?.sold}
                   quantity={item?.quantity}
                 />

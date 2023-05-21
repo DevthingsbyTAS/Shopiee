@@ -9,14 +9,25 @@ import Color from "../components/Color";
 import { TbGitCompare } from "react-icons/tb";
 import { AiOutlineHeart } from "react-icons/ai";
 import Container from "../components/Container";
-const Singleproduct = () => {
-  const props = {
+import { useLocation } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getSingleProduct } from "../features/products/productSlice";
+const Singleproduct = (props) => {
+  const propsImg = {
     width: 594,
     height: 600,
     zoomWidth: 600,
-
     img: "https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg",
   };
+
+  const location = useLocation();
+  const getProductId = location.pathname.split("/")[2];
+  const dispatch = useDispatch();
+  const { getSingleProductData } = useSelector((state) => state.product);
+
+  React.useEffect(() => {
+    dispatch(getSingleProduct(getProductId));
+  }, []);
 
   const [orderedProduct, setOrderedProduct] = React.useState(true);
   const copyToClipboard = (text) => {
@@ -38,56 +49,32 @@ const Singleproduct = () => {
             <div className="main-product-image ">
               <div>
                 <img
-                  src="https://images.pexels.com/photos/190819/pexels-photo-190819.jpeg?cs=srgb&dl=pexels-fernando-arcos-190819.jpg&fm=jpg"
+                  src={getSingleProductData?.images?.[0]?.url}
                   className="img-fluid"
                   alt="1"
                 />
-                {/* <ReactImageZoom {...props} /> */}
               </div>
             </div>
             <div className="other-product-images d-flex flex-wrap gap-10">
-              <div>
-                <img
-                  src="https://content.rolex.com/dam/2022-11/upright-bba-with-shadow/m126283rbr-0031.png?impolicy=v6-upright&imwidth=270"
-                  className="img-fluid"
-                  alt="1"
-                />
-              </div>
-              <div>
-                <img
-                  src="https://content.rolex.com/dam/2022-11/upright-bba-with-shadow/m126283rbr-0031.png?impolicy=v6-upright&imwidth=270"
-                  className="img-fluid"
-                  alt="2"
-                />
-              </div>
-              <div>
-                <img
-                  src="https://content.rolex.com/dam/2022-11/upright-bba-with-shadow/m126283rbr-0031.png?impolicy=v6-upright&imwidth=270"
-                  className="img-fluid"
-                  alt="3"
-                />
-              </div>
-              <div>
-                <img
-                  src="https://content.rolex.com/dam/2022-11/upright-bba-with-shadow/m126283rbr-0031.png?impolicy=v6-upright&imwidth=270"
-                  className="img-fluid"
-                  alt="4"
-                />
-              </div>
+              {getSingleProduct?.images?.map((item, index) => (
+                <div>
+                  <img src={item?.url} className="img-fluid" alt={item?.url} />
+                </div>
+              ))}
             </div>
           </div>
           <div className="col-6">
             <div className="main-product-details">
               <div className="border-bottom">
-                <h3 className="title">Kids Headphone in Bulk multicolor</h3>
+                <h3 className="title">{getSingleProductData?.title}</h3>
               </div>
               <div className="border-bottom py-3">
-                <p className="price">$ 100</p>
+                <p className="price">$ {getSingleProductData?.price}</p>
                 <div className="d-flex align-items-center gap-10">
                   <ReactStars
                     count={5}
                     size={24}
-                    value="3"
+                    value={getSingleProductData?.totalrating?.toString()}
                     edit={false}
                     activeColor="#ffd700"
                   />
@@ -104,15 +91,17 @@ const Singleproduct = () => {
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Brand : </h3>
-                  <p className="product-data">Havells</p>
+                  <p className="product-data">{getSingleProductData?.brand}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Category : </h3>
-                  <p className="product-data">Watch</p>
+                  <p className="product-data">
+                    {getSingleProductData?.category}
+                  </p>
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Tags : </h3>
-                  <p className="product-data">Watch</p>
+                  <p className="product-data">{getSingleProductData?.tags}</p>
                 </div>
                 <div className="d-flex gap-10 align-items-center my-2">
                   <h3 className="product-heading">Availability : </h3>
@@ -183,11 +172,7 @@ const Singleproduct = () => {
                   <p className="product-data">
                     <a
                       href="javascript:void(0);"
-                      onClick={() =>
-                        copyToClipboard(
-                          "https://content.rolex.com/dam/2022-11/upright-bba-with-shadow/m126283rbr-0031.png?impolicy=v6-upright&imwidth=270"
-                        )
-                      }
+                      onClick={() => copyToClipboard(window.location.href)}
                     >
                       Copy Product Link
                     </a>
@@ -203,12 +188,11 @@ const Singleproduct = () => {
           <div className="col-12">
             <h4>Description</h4>
             <div className="bg-white p-3">
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor,
-                nihil voluptatum vel ab fuga illo architecto maiores,
-                dignissimos, commodi ducimus aliquid deserunt. Molestiae,
-                cupiditate magnam vero in excepturi quam explicabo?
-              </p>
+              <p
+                dangerouslySetInnerHTML={{
+                  __html: getSingleProductData?.description,
+                }}
+              ></p>
             </div>
           </div>
         </div>
