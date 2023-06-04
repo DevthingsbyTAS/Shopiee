@@ -43,6 +43,26 @@ export const getUseProductrWishlist = createAsyncThunk(
     }
   }
 );
+export const addToCart = createAsyncThunk(
+  "user/addToCart",
+  async (data, thunkApi) => {
+    try {
+      return authService.addToCart(data);
+    } catch (err) {
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
+export const getCart = createAsyncThunk(
+  "user/getCart",
+  async (data, thunkApi) => {
+    try {
+      return authService.getCart();
+    } catch (err) {
+      return thunkApi.rejectWithValue(err);
+    }
+  }
+);
 export const authSlice = createSlice({
   name: "auth",
   initialState: InitialState,
@@ -111,6 +131,48 @@ export const authSlice = createSlice({
         state.message = action.error;
         if (state.isError) {
           toast.error("couldn't fetch at the moment!");
+        }
+      })
+      .addCase(addToCart.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(addToCart.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.cartData = action.payload;
+        if (state.isSuccess) {
+          toast.info("Prdouct added to cart!");
+        }
+      })
+      .addCase(addToCart.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        if (state.isError) {
+          toast.error("couldn't add to cart at moment!");
+        }
+      })
+      .addCase(getCart.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getCart.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isError = false;
+        state.isSuccess = true;
+        state.cartData = action.payload;
+        if (state.isSuccess) {
+          toast.info("Fetched user cart data!");
+        }
+      })
+      .addCase(getCart.rejected, (state, action) => {
+        state.isLoading = false;
+        state.isError = true;
+        state.isSuccess = false;
+        state.message = action.error;
+        if (state.isError) {
+          toast.error("couldn't fetch cart at moment!");
         }
       });
   },

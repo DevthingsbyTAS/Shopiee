@@ -12,6 +12,9 @@ import Container from "../components/Container";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getSingleProduct } from "../features/products/productSlice";
+import { addToCart, getCart } from "../features/user/userSLice";
+import { toast } from "react-toastify";
+import { useEffect } from "react";
 const Singleproduct = (props) => {
   const propsImg = {
     width: 594,
@@ -24,12 +27,18 @@ const Singleproduct = (props) => {
   const getProductId = location.pathname.split("/")[2];
   const dispatch = useDispatch();
   const { getSingleProductData } = useSelector((state) => state.product);
+  const { cartData } = useSelector((state) => state.auth);
 
   React.useEffect(() => {
+    dispatch(getCart());
     dispatch(getSingleProduct(getProductId));
   }, []);
 
   const [orderedProduct, setOrderedProduct] = React.useState(true);
+  const [quantity, setquantity] = React.useState(1);
+  const [color, setcolor] = React.useState(null);
+  const [alreadyAdded, setalreadyAdded] = React.useState(false);
+
   const copyToClipboard = (text) => {
     console.log("text", text);
     var textField = document.createElement("textarea");
@@ -39,6 +48,20 @@ const Singleproduct = (props) => {
     document.execCommand("copy");
     textField.remove();
   };
+  function AddtoCart(data) {
+    if (color == null) {
+      toast.info("Please choose color");
+    } else {
+      dispatch(addToCart(data));
+    }
+  }
+  useEffect(() => {
+    for (let ind = 0; ind < cartData?.length; ind++) {
+      if (getProductId == cartData[ind]?.productId?._id) {
+        setalreadyAdded(true);
+      }
+    }
+  }, []);
   return (
     <>
       <Meta title="Single Product Name" />
@@ -126,7 +149,11 @@ const Singleproduct = (props) => {
                 </div>
                 <div className="d-flex gap-10 align-items-center mt-2 mb-3">
                   <h3 className="product-heading">Color : </h3>
-                  <Color />
+                  <Color
+                    colorData={getSingleProductData?.color}
+                    value={color}
+                    setcolor={setcolor}
+                  />
                 </div>
                 <div className="d-flex gap-15 flex-row align-items-center mt-2 mb-3">
                   <h3 className="product-heading">Quantity : </h3>
@@ -135,6 +162,10 @@ const Singleproduct = (props) => {
                       min={1}
                       max={10}
                       id="quantity"
+                      value={quantity}
+                      onChange={(e) => {
+                        setquantity(e.target.value);
+                      }}
                       type="number"
                       name="quantity"
                       className=" form-control"
@@ -142,7 +173,30 @@ const Singleproduct = (props) => {
                     />
                   </div>
                   <div className="d-flex gap-30 align-items-center ms-5">
-                    <button className="button">Add to cart</button>
+                    {alreadyAdded ? (
+                      <button
+                        className="button"
+                        onClick={() => {
+                          
+                        }}
+                      >
+                        Go to cart
+                      </button>
+                    ) : (
+                      <button
+                        className="button"
+                        onClick={() => {
+                          AddtoCart({
+                            productId: getSingleProductData?._id,
+                            color: color,
+                            quantity: quantity,
+                            price: getSingleProductData?.price,
+                          });
+                        }}
+                      >
+                        Add to cart
+                      </button>
+                    )}
                     <button to="/signup" className="button signup">
                       Buy Now
                     </button>
